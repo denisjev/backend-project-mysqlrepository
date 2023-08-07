@@ -5,7 +5,7 @@ namespace Contexts.Users.Infraestruture;
 
 public class UserRepositoryFromMySQL: IUserRepository
 {
-    AppDbContext appDbContext;
+    private readonly AppDbContext  appDbContext;
     
     public UserRepositoryFromMySQL(AppDbContext _appDbContext)
     {
@@ -19,7 +19,7 @@ public class UserRepositoryFromMySQL: IUserRepository
 
     public async Task<User> GetById(string id)
     {
-        return await appDbContext.Users.FindAsync(id);
+        return await appDbContext.Users.FindAsync(Guid.Parse(id));
     }
     public async Task<bool> Add(User user)
     {
